@@ -1,14 +1,10 @@
 {
-  "name": "happy-birthday",
+  "name": "anniversary-wishes",
   "version": "1.0.0",
-  "description": "An app that let's you say happy birthday to your friend in a nerdy way.",
-  "main": "index.js",
-  "devDependencies": {
-    "browser-sync": "^2.18.13",
-    "run-script-os": "^1.0.2"
-  },
+  "description": "旭旭周年快乐项目",
   "scripts": {
-    "start": "run-script-os",
+    "start": "serve .",
+    "dev": "serve .",
     "start:win32": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777 --browser \"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\"",
     "//": "Hello! If you are having trouble running this command. Try changing Firefox Developer Edition to FirefoxDeveloperEdition",
     "start:darwin:linux": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777",
@@ -28,5 +24,9 @@
     "url": "https://github.com/faahim/happy-birthday/issues"
   },
   "homepage": "https://github.com/faahim/happy-birthday#readme",
-  "dependencies": {}
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "run-script-os": "^1.0.2",
+    "serve": "^14.2.4"
+  }
 }
