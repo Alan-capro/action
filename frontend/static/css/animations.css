@@ -1,0 +1,89 @@
+/* 樱花飘落效果 */
+.sakura {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(100px, 100vh) rotate(360deg);
+  }
+}
+
+/* 文字渐入效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 心跳效果 */
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* 应用动画 */
+.fade-in-up {
+  animation: fadeInUp 1s ease forwards;
+}
+
+.heartbeat {
+  animation: heartbeat 1.5s infinite;
+}
+
+/* 优化现有样式 */
+body {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.wish-text {
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #e91e63;
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #f8bbd0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.button-style {
+  background: #e91e63;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+.button-style:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+} 

@@ -230,17 +230,24 @@ const animationTimeline = () => {
       "+=1"
     )
     .staggerFromTo(
-      ".baloons img",
-      2.5,
+      ".memory-photos img",
+      2,
       {
-        opacity: 0.9,
-        y: 1400
+        scale: 0.5,
+        opacity: 0,
+        y: 500,
+        rotation: -30,
+        x: () => Math.random() * window.innerWidth - window.innerWidth/2
       },
       {
+        scale: 1,
         opacity: 1,
-        y: -1000
+        y: () => Math.random() * 200,
+        rotation: () => Math.random() * 20 - 10,
+        x: () => Math.random() * window.innerWidth - window.innerWidth/2,
+        ease: "back.out(1.4)"
       },
-      0.2
+      0.1
     )
     .from(
       ".lydia-dp",
@@ -325,6 +332,20 @@ const animationTimeline = () => {
       },
       "+=1"
     )
+    .add(() => {
+      gsap.to(".memory-photos img", {
+        y: "+=15",
+        rotation: "+=3",
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: {
+          each: 0.2,
+          from: "random"
+        }
+      });
+    })
 
   // tl.seek("currentStep");
   // tl.timeScale(2);
@@ -339,3 +360,27 @@ const animationTimeline = () => {
 
 // Run fetch and animation in sequence
 fetchData()
+
+// 修改照片点击事件
+document.querySelectorAll('.memory-photos img').forEach(img => {
+  img.addEventListener('click', () => {
+    gsap.to(img, {
+      scale: 2,  // 放大到2倍
+      zIndex: 1000,
+      duration: 0.5,
+      ease: "back.out(1.7)",
+      onComplete: () => {
+        const closeHandler = () => {
+          gsap.to(img, {
+            scale: 1,
+            zIndex: 100,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+          document.removeEventListener('click', closeHandler);
+        };
+        document.addEventListener('click', closeHandler);
+      }
+    });
+  });
+});

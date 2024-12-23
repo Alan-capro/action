@@ -349,3 +349,40 @@ body {
   padding: 1rem 1.6rem;
   cursor: pointer;
 }
+
+.memory-photos {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 50vh;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.memory-photos img {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: 3px solid white;
+  transform-origin: center center;
+  pointer-events: auto;
+  cursor: move;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.memory-photos img:hover {
+  transform: scale(1.5) rotate(0deg) !important;
+  z-index: 1000;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.memory-photos img.dragging {
+  opacity: 0.8;
+  transform: scale(1.1);
+  z-index: 1001;
+}

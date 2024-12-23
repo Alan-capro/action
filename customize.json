@@ -1,11 +1,11 @@
 {
   "greeting": "亲爱的",
   "name": "旭旭",
-  "greetingText": "时光飞逝，转眼间我们已经在一起这么久了",
-  "wishText": "愿我们的爱情，如四季流转，春华秋实，岁岁年年。愿你我执手相伴，未来可期。",
-  "imagePath": "img/lydia2.png",
-  "text1": "今天是我们的周年纪念日！ :D",
-  "textInChatBox": "想对你说，遇见你是我最大的幸运，感谢有你陪伴的每一天！",
+  "greetingText": "时光荏苒，岁月如歌",
+  "wishText": "愿我们的爱情，如春日暖阳，似夏夜繁星，若秋日私语，像冬雪纯净。愿时光温柔以待，岁月静好依然。",
+  "imagePath": "static/img/profile.png",
+  "text1": "今天是我们的纪念日 ❤️",
+  "textInChatBox": "遇见你，是我生命中最美好的事情，感谢有你陪伴的每一天！",
   "sendButtonLabel": "发送",
   "text2": "为了这个特别的日子",
   "text3": "我准备了一个小惊喜",
@@ -17,7 +17,7 @@
   "bigTextPart1": "永",
   "bigTextPart2": "远",
   "wishHeading": "周年快乐！",
-  "outroText": "希望这个小惊喜能让你开心！",
-  "replayText": "愿我们的故事，一直继续下去...",
+  "outroText": "愿我们的爱情，永远如初见般美好！",
+  "replayText": "点击重播，重温这份感动...",
   "outroSmiley": "💑"
 }
