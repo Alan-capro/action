@@ -285,7 +285,7 @@ function showPhotoWall() {
   photosContainer.className = 'photo-wall-content';
   
   // 使用正确的图片路径
-  for(let i = 1; i <= 17; i++) {
+  for(let i = 1; i <= 16; i++) {
     const photoItem = document.createElement('div');
     photoItem.className = 'photo-item';
     
