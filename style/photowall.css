@@ -1,10 +1,22 @@
+/* 更新配色方案 */
+:root {
+  --primary-color: #f4a7b9; /* 柔和的粉色 */
+  --secondary-color: #e7a4c3; /* 淡紫粉 */
+  --accent-color: #c8a2c8; /* 淡紫色 */
+  --soft-pink: #ffd6e0; /* 浅粉色 */
+  --light-purple: #e6e6fa; /* 淡淡的紫色 */
+  --soft-white: #fff9fb; /* 温暖的白色 */
+  --gradient-start: #ffd1dc; /* 渐变开始色 */
+  --gradient-end: #e7ccd4; /* 渐变结束色 */
+}
+
 .photo-wall-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(25,0,51,0.9));
+  background: linear-gradient(135deg, rgba(244, 167, 185, 0.95), rgba(200, 162, 200, 0.95));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +47,7 @@
 .photo-wall {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 249, 251, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   width: 800px;
@@ -43,7 +55,7 @@
   padding: 25px;
   position: relative;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(244, 167, 185, 0.2);
 }
 
 .photo-wall-content {
@@ -93,8 +105,8 @@
 
 .photo-item:hover {
   transform: translateY(-15px) scale(1.05);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3),
-              0 0 20px rgba(255,105,180,0.3);
+  box-shadow: 0 15px 30px rgba(244, 167, 185, 0.2),
+              0 0 20px rgba(231, 164, 195, 0.2);
   z-index: 2;
 }
 
@@ -115,12 +127,12 @@
 
 .photo-wall h2 {
   text-align: center;
-  color: #d42426;
+  color: var(--primary-color);
   font-size: 28px;
   margin-bottom: 25px;
   font-weight: 300;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 4px rgba(244, 167, 185, 0.2);
 }
 
 .photo-wall h2::before,
@@ -165,7 +177,7 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 12px 35px;
-  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
   border-radius: 25px;
@@ -174,14 +186,14 @@
   font-weight: 500;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+  box-shadow: 0 4px 15px rgba(244, 167, 185, 0.3);
   z-index: 2;
 }
 
 .continue-btn:hover {
   transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255,105,180,0.4);
-  background: linear-gradient(45deg, #ff1493, #ff69b4);
+  box-shadow: 0 6px 20px rgba(244, 167, 185, 0.4);
+  background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
 }
 
 .gift-card-modal {
@@ -200,7 +212,7 @@
 .gift-card {
   width: 350px;
   padding: 35px;
-  background: linear-gradient(135deg, #ff69b4, #ff1493, #ff69b4);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
   background-size: 200% 200%;
   border-radius: 20px;
   color: white;
@@ -242,8 +254,8 @@
 .gift-card-btn {
   margin-top: 25px;
   padding: 12px 35px;
-  background: white;
-  color: #ff1493;
+  background: var(--soft-white);
+  color: var(--primary-color);
   border: none;
   border-radius: 25px;
   font-size: 16px;
@@ -256,7 +268,7 @@
 .gift-card-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  background: #fff5f9;
+  background: var(--light-purple);
 }
 
 @keyframes shimmer {
@@ -288,20 +300,20 @@
 
 .photo-wall-btn {
   padding: 12px 35px;
-  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
   border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+  box-shadow: 0 4px 15px rgba(244, 167, 185, 0.3);
 }
 
 .photo-wall-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255,105,180,0.4);
-  background: linear-gradient(45deg, #ff1493, #ff69b4);
+  box-shadow: 0 6px 20px rgba(244, 167, 185, 0.4);
+  background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
 }
 
 /* 美化滚动条 */
@@ -315,7 +327,7 @@
 }
 
 .photo-wall-content::-webkit-scrollbar-thumb {
-  background: #ff69b4;
+  background: var(--primary-color);
   border-radius: 3px;
 }
 
@@ -325,9 +337,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255,255,255,0.98);
-  border: 1px solid rgba(255,105,180,0.3);
-  box-shadow: 0 10px 40px rgba(255,105,180,0.2);
+  background: var(--soft-white);
+  border: 1px solid rgba(244, 167, 185, 0.2);
+  box-shadow: 0 10px 40px rgba(244, 167, 185, 0.15);
   padding: 30px;
   border-radius: 15px;
   width: 400px;
@@ -336,8 +348,8 @@
 }
 
 .letter-content {
-  background: linear-gradient(135deg, #fff8f8, #fff);
-  border: 1px solid rgba(255,105,180,0.2);
+  background: linear-gradient(135deg, var(--soft-white), #fff);
+  border: 1px solid rgba(244, 167, 185, 0.1);
   padding: 25px;
   border-radius: 10px;
   font-size: 16px;
@@ -355,7 +367,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #ff69b4;
+  background: var(--primary-color);
   color: white;
   display: flex;
   align-items: center;
@@ -366,7 +378,7 @@
 }
 
 .letter-close:hover {
-  background: #ff1493;
+  background: var(--secondary-color);
   transform: rotate(90deg);
 }
 
@@ -436,6 +448,8 @@
   font-size: 30px;
   animation: floatHeart 3s ease-in forwards;
   z-index: 1000;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px rgba(244, 167, 185, 0.5);
 }
 
 @keyframes floatHeart {
@@ -460,7 +474,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(25,0,51,0.95));
+  background: linear-gradient(135deg, rgba(244, 167, 185, 0.95), rgba(200, 162, 200, 0.95));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -492,12 +506,12 @@
 }
 
 .final-video::-webkit-media-controls-play-button {
-  background-color: #ff69b4;
+  background-color: var(--primary-color);
   border-radius: 50%;
 }
 
 .final-video::-webkit-media-controls-timeline {
-  background-color: rgba(255,105,180,0.3);
+  background-color: rgba(244, 167, 185, 0.3);
   border-radius: 10px;
   margin: 0 10px;
 }
