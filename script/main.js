@@ -121,7 +121,6 @@ const animationTimeline = () => {
     .from(".three", 0.7, {
       opacity: 0,
       y: 10
-      // scale: 0.7
     })
     .to(
       ".three",
@@ -175,146 +174,25 @@ const animationTimeline = () => {
     .to(".idea-3", 0.7, ideaTextTransLeave, "+=1.5")
     .from(".idea-4", 0.7, ideaTextTrans)
     .to(".idea-4", 0.7, ideaTextTransLeave, "+=1.5")
-    .from(
-      ".idea-5",
-      0.7,
-      {
-        rotationX: 15,
-        rotationZ: -10,
-        skewY: "-5deg",
-        y: 50,
-        z: 10,
-        opacity: 0
-      },
-      "+=0.5"
-    )
-    .to(
-      ".idea-5 .smiley",
-      0.7,
-      {
-        rotation: 90,
-        x: 8
-      },
-      "+=0.4"
-    )
-    .to(
-      ".idea-5",
-      0.7,
-      {
-        scale: 0.2,
-        opacity: 0
-      },
-      "+=2"
-    )
-    .staggerFrom(
-      ".idea-6 span",
-      0.8,
-      {
-        scale: 3,
-        opacity: 0,
-        rotation: 15,
-        ease: Expo.easeOut
-      },
-      0.2
-    )
-    .staggerTo(
-      ".idea-6 span",
-      0.8,
-      {
-        scale: 3,
-        opacity: 0,
-        rotation: -15,
-        ease: Expo.easeOut
-      },
-      0.2,
-      "+=1"
-    )
-    .staggerFromTo(
-      ".memory-photos img",
-      2,
-      {
-        scale: 0.5,
-        opacity: 0,
-        y: 200,
-        rotation: () => Math.random() * 30 - 15,
-        x: () => Math.random() * window.innerWidth
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        y: (index) => {
-          const row = Math.floor(index / 6);
-          const baseY = window.innerHeight - 500;
-          const rowHeight = 150;
-          return baseY + row * rowHeight + (Math.random() - 0.5) * 50;
-        },
-        x: (index) => {
-          const column = index % 6;
-          const totalColumns = 6;
-          const margin = 150;
-          const usableWidth = window.innerWidth - (margin * 2);
-          const segmentWidth = usableWidth / (totalColumns - 1);
-          const baseX = margin + (column * segmentWidth);
-          const maxOffset = segmentWidth * 0.2;
-          const randomOffset = (Math.random() - 0.5) * maxOffset;
-          return baseX + randomOffset;
-        },
-        rotation: () => Math.random() * 12 - 6,
-        ease: "back.out(1.4)"
-      },
-      0.1
-    )
-    .add(() => {
-      TweenMax.to(".memory-photos img", {
-        y: "+=8",
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: {
-          each: 0.1,
-          from: "random"
-        }
-      });
-    })
-    .from(
-      ".lydia-dp",
-      0.5,
-      {
-        scale: 3.5,
-        opacity: 0,
-        x: 25,
-        y: -25,
-        rotationZ: -45
-      },
-      "-=2"
-    )
-    .from(".hat", 0.5, {
-      x: -100,
-      y: 350,
-      rotation: -180,
-      opacity: 0
-    })
+    .from(".idea-5", 0.7, ideaTextTrans)
+    .to(".idea-5", 0.7, ideaTextTransLeave, "+=1.5")
+    .from(".idea-6", 0.7, ideaTextTrans)
+    .to(".idea-6", 0.7, ideaTextTransLeave, "+=1.5")
     .staggerFrom(
       ".wish-hbd span",
       0.7,
       {
         opacity: 0,
         y: -50,
-        // scale: 0.3,
         rotation: 150,
         skewX: "30deg",
         ease: Elastic.easeOut.config(1, 0.5)
       },
       0.1
     )
-    .staggerFromTo(
+    .staggerTo(
       ".wish-hbd span",
       0.7,
-      {
-        scale: 1.4,
-        rotationY: 150
-      },
       {
         scale: 1,
         rotationY: 0,
@@ -334,6 +212,11 @@ const animationTimeline = () => {
       },
       "party"
     )
+    .to("#showPhotoWallBtn", 1, {
+      opacity: 1,
+      y: 20,
+      ease: "bounce.out"
+    })
     .staggerTo(
       ".eight svg",
       1.5,
@@ -360,41 +243,184 @@ const animationTimeline = () => {
       },
       "+=1"
     )
-
-  // tl.seek("currentStep");
-  // tl.timeScale(2);
-
-  // Restart Animation on click
-  const replyBtn = document.getElementById("replay")
-  replyBtn.addEventListener("click", () => {
-    tl.restart()
-
-  })
+    .from(
+      ".lydia-dp",
+      0.5,
+      {
+        scale: 3.5,
+        opacity: 0,
+        x: 25,
+        y: -25,
+        rotationZ: -45
+      },
+      "-=2"
+    )
+    .from(".rose", 0.5, {
+      x: -100,
+      y: 350,
+      rotation: -180,
+      opacity: 0
+    })
 }
 
 // Run fetch and animation in sequence
 fetchData()
 
-// 修改照片点击事件
-document.querySelectorAll('.memory-photos img').forEach(img => {
-  img.addEventListener('click', () => {
-    gsap.to(img, {
-      scale: 2,  // 放大到2倍
-      zIndex: 1000,
-      duration: 0.5,
-      ease: "back.out(1.7)",
-      onComplete: () => {
-        const closeHandler = () => {
-          gsap.to(img, {
-            scale: 1,
-            zIndex: 100,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-          document.removeEventListener('click', closeHandler);
-        };
-        document.addEventListener('click', closeHandler);
-      }
-    });
+// 修改照片墙函数
+function showPhotoWall() {
+  const modal = document.createElement('div');
+  modal.className = 'photo-wall-modal';
+  modal.style.display = 'flex';
+  
+  const photoWall = document.createElement('div');
+  photoWall.className = 'photo-wall';
+  
+  // 添加标题
+  const title = document.createElement('h2');
+  title.textContent = '我们的美好回忆';
+  photoWall.appendChild(title);
+  
+  // 创建照片容器
+  const photosContainer = document.createElement('div');
+  photosContainer.className = 'photo-wall-content';
+  
+  // 使用正确的图片路径
+  for(let i = 1; i <= 17; i++) {
+    const photoItem = document.createElement('div');
+    photoItem.className = 'photo-item';
+    
+    const img = document.createElement('img');
+    img.src = `frontend/static/img/memories/photo${i}.jpg`;
+    img.dataset.message = photoMessages[`photo${i}`];
+    
+    // 修改照片点击事件
+    photoItem.onclick = () => {
+      const message = img.dataset.message;
+      
+      // 创建信件弹窗
+      const letterModal = document.createElement('div');
+      letterModal.className = 'letter-modal';
+      
+      // 创建信件内容
+      const letterContent = document.createElement('div');
+      letterContent.className = 'letter-content';
+      letterContent.textContent = message;
+      
+      // 创建关闭按钮
+      const closeBtn = document.createElement('div');
+      closeBtn.className = 'letter-close';
+      closeBtn.innerHTML = '×';
+      closeBtn.onclick = (e) => {
+        e.stopPropagation();
+        letterModal.remove();
+      };
+      
+      // 添加到页面
+      letterModal.appendChild(letterContent);
+      letterModal.appendChild(closeBtn);
+      document.body.appendChild(letterModal);
+      
+      // 点击图片时的动画效果
+      img.style.transform = 'scale(1.15) rotate(2deg)';
+      setTimeout(() => {
+        img.style.transform = 'scale(1.08) rotate(1deg)';
+      }, 300);
+      
+      // 点击弹窗外部关闭
+      letterModal.onclick = (e) => {
+        if (e.target === letterModal) {
+          letterModal.remove();
+        }
+      };
+    };
+    
+    photoItem.appendChild(img);
+    photosContainer.appendChild(photoItem);
+  }
+  
+  photoWall.appendChild(photosContainer);
+  
+  const continueBtn = document.createElement('button');
+  continueBtn.className = 'continue-btn';
+  continueBtn.textContent = '继续我们的故事';
+  continueBtn.onclick = () => {
+    modal.style.opacity = '0';
+    setTimeout(() => {
+      modal.remove();
+      showGiftCard();
+    }, 300);
+  };
+  
+  photoWall.appendChild(continueBtn);
+  modal.appendChild(photoWall);
+  
+  // 添加渐入动画
+  modal.style.opacity = '0';
+  document.body.appendChild(modal);
+  requestAnimationFrame(() => {
+    modal.style.opacity = '1';
+    modal.style.transition = 'opacity 0.3s ease';
   });
+}
+
+// 修改礼物卡函数
+function showGiftCard() {
+  const modal = document.createElement('div');
+  modal.className = 'gift-card-modal';
+  modal.style.display = 'flex';  // 确保弹窗显示
+  
+  const giftCard = document.createElement('div');
+  giftCard.className = 'gift-card';
+  giftCard.innerHTML = `
+    <h2>爱的礼物卡</h2>
+    <p>亲爱的，</p>
+    <p>这是一张特别的礼物卡，代表我对你的爱</p>
+    <p>永远爱你 ❤️</p>
+  `;
+  
+  modal.appendChild(giftCard);
+  document.body.appendChild(modal);
+  
+  // 点击任意位置关闭礼物卡
+  modal.onclick = () => {
+    modal.remove();
+    // 继续播放剩余动画
+    continueAnimation();
+  };
+}
+
+// 继续播放剩余动画
+function continueAnimation() {
+  const tl = new TimelineMax();
+  
+  tl.staggerFrom(
+    ".wish-hbd span",
+    0.7,
+    {
+      opacity: 0,
+      y: -50,
+      rotation: 150,
+      skewX: "30deg",
+      ease: Elastic.easeOut.config(1, 0.5)
+    },
+    0.1
+  )
+  .staggerTo(
+    ".wish-hbd span",
+    0.7,
+    {
+      scale: 1,
+      rotationY: 0,
+      color: "#ff69b4",
+      ease: Expo.easeOut
+    },
+    0.1,
+    "party"
+  )
+  // ... 其他结束动画
+}
+
+// 添加按钮点击事件监听
+document.getElementById('showPhotoWallBtn').addEventListener('click', () => {
+  showPhotoWall();
 });

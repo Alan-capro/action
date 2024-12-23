@@ -1,0 +1,101 @@
+.photos-showcase-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(10px);
+}
+
+.photos-showcase-content {
+  background: linear-gradient(145deg, #ffffff, #f8f8f8);
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.showcase-title {
+  font-size: 28px;
+  color: #ff69b4;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.photo-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+  transform: scale(1.05);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+  transform: scale(1.1);
+}
+
+.showcase-next {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 40px;
+  font-size: 18px;
+  color: white;
+  background: linear-gradient(45deg, #ff69b4, #ff8da1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+}
+
+.showcase-next:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255,105,180,0.6);
+}
+
+/* 添加照片进入动画 */
+.photo-item {
+  animation: fadeInScale 0.6s ease-out backwards;
+}
+
+.photo-item:nth-child(n) {
+  animation-delay: calc(0.1s * var(--photo-index));
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+} 

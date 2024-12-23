@@ -15,4 +15,17 @@ const photoMessages = {
   'photo14': '海边的风很温柔，你的笑容更温柔...',
   'photo15': '这张是我最喜欢的照片，你笑得真美...',
   'photo16': '永远爱你，我的小可爱...'
+};
+
+const messages = {
+  // ... 原有的消息
+  photoWall: {
+    title: "我们的照片墙",
+    description: "这些都是我们美好的回忆"
+  },
+  giftCard: {
+    title: "爱的礼物卡",
+    message: "这是一份特别的礼物，代表我对你的爱"
+  }
+  // ... 其他消息
 }; 
