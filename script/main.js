@@ -235,20 +235,48 @@ const animationTimeline = () => {
       {
         scale: 0.5,
         opacity: 0,
-        y: 500,
-        rotation: -30,
-        x: () => Math.random() * window.innerWidth - window.innerWidth/2
+        y: 200,
+        rotation: () => Math.random() * 30 - 15,
+        x: () => Math.random() * window.innerWidth
       },
       {
         scale: 1,
         opacity: 1,
-        y: () => Math.random() * 200,
-        rotation: () => Math.random() * 20 - 10,
-        x: () => Math.random() * window.innerWidth - window.innerWidth/2,
+        y: (index) => {
+          const row = Math.floor(index / 6);
+          const baseY = window.innerHeight - 500;
+          const rowHeight = 150;
+          return baseY + row * rowHeight + (Math.random() - 0.5) * 50;
+        },
+        x: (index) => {
+          const column = index % 6;
+          const totalColumns = 6;
+          const margin = 150;
+          const usableWidth = window.innerWidth - (margin * 2);
+          const segmentWidth = usableWidth / (totalColumns - 1);
+          const baseX = margin + (column * segmentWidth);
+          const maxOffset = segmentWidth * 0.2;
+          const randomOffset = (Math.random() - 0.5) * maxOffset;
+          return baseX + randomOffset;
+        },
+        rotation: () => Math.random() * 12 - 6,
         ease: "back.out(1.4)"
       },
       0.1
     )
+    .add(() => {
+      TweenMax.to(".memory-photos img", {
+        y: "+=8",
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: {
+          each: 0.1,
+          from: "random"
+        }
+      });
+    })
     .from(
       ".lydia-dp",
       0.5,
@@ -332,20 +360,6 @@ const animationTimeline = () => {
       },
       "+=1"
     )
-    .add(() => {
-      gsap.to(".memory-photos img", {
-        y: "+=15",
-        rotation: "+=3",
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: {
-          each: 0.2,
-          from: "random"
-        }
-      });
-    })
 
   // tl.seek("currentStep");
   // tl.timeScale(2);
