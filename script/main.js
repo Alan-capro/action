@@ -293,7 +293,7 @@ function showPhotoWall() {
     img.src = `frontend/static/img/memories/photo${i}.jpg`;
     img.dataset.message = photoMessages[`photo${i}`];
     
-    // 修改照片点击事件
+    // 添加点击事件
     photoItem.onclick = () => {
       const message = img.dataset.message;
       
@@ -315,23 +315,9 @@ function showPhotoWall() {
         letterModal.remove();
       };
       
-      // 添加到页面
       letterModal.appendChild(letterContent);
       letterModal.appendChild(closeBtn);
       document.body.appendChild(letterModal);
-      
-      // 点击图片时的动画效果
-      img.style.transform = 'scale(1.15) rotate(2deg)';
-      setTimeout(() => {
-        img.style.transform = 'scale(1.08) rotate(1deg)';
-      }, 300);
-      
-      // 点击弹窗外部关闭
-      letterModal.onclick = (e) => {
-        if (e.target === letterModal) {
-          letterModal.remove();
-        }
-      };
     };
     
     photoItem.appendChild(img);
@@ -354,14 +340,53 @@ function showPhotoWall() {
   photoWall.appendChild(continueBtn);
   modal.appendChild(photoWall);
   
-  // 添加渐入动画
+  // 添加到页面并设置渐入动画
   modal.style.opacity = '0';
   document.body.appendChild(modal);
   requestAnimationFrame(() => {
     modal.style.opacity = '1';
     modal.style.transition = 'opacity 0.3s ease';
   });
+
+  // 修改照片显示动画
+  const photos = photosContainer.querySelectorAll('.photo-item');
+  photos.forEach((photo, index) => {
+    photo.style.opacity = '0';
+    photo.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      photo.style.opacity = '1';
+      photo.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+
+  // 添加爱心飘落效果
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.innerHTML = '💗';
+    heart.style.position = 'fixed';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = '-20px';
+    heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+    heart.style.opacity = '0.6';
+    heart.style.animation = `fallHeart ${Math.random() * 3 + 2}s linear forwards`;
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 2000);
 }
+
+// 添加爱心飘落动画
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fallHeart {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+    }
+  }
+`;
+document.head.appendChild(style);
 
 // 修改礼物卡函数
 function showGiftCard() {
@@ -415,7 +440,7 @@ function showHeartEffect() {
   }
 }
 
-// 继续播放剩余动画
+// 修改 continueAnimation 函数
 function continueAnimation() {
   const tl = new TimelineMax();
   
@@ -443,10 +468,56 @@ function continueAnimation() {
     0.1,
     "party"
   )
-  // ... 其他结束动画
+  .to(
+    ".nine",
+    0.5,
+    {
+      opacity: 0,
+      onComplete: showVideo
+    }
+  );
+}
+
+// 添加视频播放函数
+function showVideo() {
+  const videoModal = document.createElement('div');
+  videoModal.className = 'video-modal';
+  
+  const videoContainer = document.createElement('div');
+  videoContainer.className = 'video-container';
+  
+  const video = document.createElement('video');
+  video.className = 'final-video';
+  video.controls = true;
+  video.autoplay = true;
+  video.src = 'frontend/static/video/final.mp4'; // 替换为你的视频路径
+  
+  videoContainer.appendChild(video);
+  videoModal.appendChild(videoContainer);
+  document.body.appendChild(videoModal);
 }
 
 // 添加按钮点击事件监听
 document.getElementById('showPhotoWallBtn').addEventListener('click', () => {
   showPhotoWall();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 获取开始按钮和开始提示
+  const startButton = document.getElementById('startButton');
+  const startSign = document.querySelector('.startSign');
+  const container = document.querySelector('.container');
+
+  // 添加开始按钮点击事件
+  startButton.addEventListener('click', () => {
+    // 隐藏开始提示
+    startSign.style.opacity = '0';
+    setTimeout(() => {
+      startSign.style.display = 'none';
+      // 显示主容器
+      container.style.display = 'block';
+      // 开始动画
+      animationTimeline();
+    }, 500);
+  });
 });

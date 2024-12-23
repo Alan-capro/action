@@ -15,6 +15,7 @@ body {
   visibility: hidden;
   position: relative;
   overflow: hidden;
+  display: none;
 }
 
 .container div.six {
@@ -330,25 +331,31 @@ body {
 }
 
 .startSign {
-  /* 居中 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 20vh 5vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  transition: opacity 0.5s ease;
 }
 
-.startSign .button {
-  padding: 1rem 1.6rem;
-  border: 1px solid #2ba245;
-  border-radius: 5px;
-}
-
-.startSign .button:hover {
-  background-color: #2ba245;
-  color: #fff;
-  padding: 1rem 1.6rem;
+.button {
   cursor: pointer;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+  margin-top: 20px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,105,180,0.4);
+  background: linear-gradient(45deg, #ff1493, #ff69b4);
 }
 
 .memory-photos {

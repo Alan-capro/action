@@ -4,23 +4,46 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(25,0,51,0.9));
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+.photo-wall-modal::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  transform: rotate(45deg);
+  animation: starsShimmer 120s linear infinite;
+  opacity: 0.2;
+}
+
+@keyframes starsShimmer {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
 }
 
 .photo-wall {
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   width: 800px;
   max-height: 600px;
   padding: 25px;
   position: relative;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .photo-wall-content {
@@ -41,7 +64,7 @@
   cursor: pointer;
   transform-origin: center;
   animation: photoFadeIn 0.6s ease-out backwards;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(0);
 }
 
@@ -69,8 +92,9 @@
 }
 
 .photo-item:hover {
-  transform: translateY(-20px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3),
+              0 0 20px rgba(255,105,180,0.3);
   z-index: 2;
 }
 
@@ -176,7 +200,8 @@
 .gift-card {
   width: 350px;
   padding: 35px;
-  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  background: linear-gradient(135deg, #ff69b4, #ff1493, #ff69b4);
+  background-size: 200% 200%;
   border-radius: 20px;
   color: white;
   text-align: center;
@@ -184,6 +209,7 @@
   animation: cardPop 0.5s ease-out;
   position: relative;
   overflow: hidden;
+  animation: gradientBG 3s ease infinite;
 }
 
 .gift-card::before {
@@ -249,33 +275,33 @@
   }
 }
 
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .photo-wall-btn-container {
-  position: absolute;
-  bottom: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
+  margin-top: 20px;
   text-align: center;
 }
 
 .photo-wall-btn {
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #ff69b4;
+  padding: 12px 35px;
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
   color: white;
   border: none;
   border-radius: 25px;
-  cursor: pointer;
   font-size: 16px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  opacity: 0;  /* 初始隐藏 */
+  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
 }
 
 .photo-wall-btn:hover {
-  background: #ff1493;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,105,180,0.4);
+  background: linear-gradient(45deg, #ff1493, #ff69b4);
 }
 
 /* 美化滚动条 */
@@ -299,24 +325,27 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: rgba(255,255,255,0.98);
+  border: 1px solid rgba(255,105,180,0.3);
+  box-shadow: 0 10px 40px rgba(255,105,180,0.2);
   padding: 30px;
   border-radius: 15px;
   width: 400px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   z-index: 10000;
   animation: letterPop 0.4s ease-out;
 }
 
 .letter-content {
-  background: linear-gradient(45deg, #fff8f8, #fff);
+  background: linear-gradient(135deg, #fff8f8, #fff);
+  border: 1px solid rgba(255,105,180,0.2);
   padding: 25px;
   border-radius: 10px;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.8;
   color: #333;
   white-space: pre-line;
   margin-bottom: 20px;
+  font-family: 'Ma Shan Zheng', cursive;
 }
 
 .letter-close {
@@ -386,7 +415,7 @@
   top: -25px;
   right: 20px;
   font-size: 35px;
-  animation: santaWave 2s ease-in-out infinite;
+  animation: heartBeat 1.5s ease infinite;
 }
 
 @keyframes treeWiggle {
@@ -394,9 +423,12 @@
   50% { transform: rotate(5deg); }
 }
 
-@keyframes santaWave {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
 }
 
 .floating-heart {
@@ -418,6 +450,64 @@
   100% {
     transform: translateY(0) scale(1);
     opacity: 0;
+  }
+}
+
+/* 视频播放页面样式 */
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(25,0,51,0.95));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.video-container {
+  width: 80%;
+  max-width: 1000px;
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.final-video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 自定义视频控件样式 */
+.final-video::-webkit-media-controls-panel {
+  background: rgba(255,255,255,0.2);
+}
+
+.final-video::-webkit-media-controls-play-button {
+  background-color: #ff69b4;
+  border-radius: 50%;
+}
+
+.final-video::-webkit-media-controls-timeline {
+  background-color: rgba(255,105,180,0.3);
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
   
