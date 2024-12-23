@@ -25,7 +25,7 @@ const messages = {
   },
   giftCard: {
     title: "爱的礼物卡",
-    message: "这是一份特别的礼物，代表我对你的爱"
+    message: "这是一份礼物卡，请宝贝凭此卡兑换任何礼物"
   }
   // ... 其他消息
 }; 

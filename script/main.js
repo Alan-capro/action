@@ -367,26 +367,52 @@ function showPhotoWall() {
 function showGiftCard() {
   const modal = document.createElement('div');
   modal.className = 'gift-card-modal';
-  modal.style.display = 'flex';  // 确保弹窗显示
+  modal.style.display = 'flex';
   
   const giftCard = document.createElement('div');
   giftCard.className = 'gift-card';
   giftCard.innerHTML = `
-    <h2>爱的礼物卡</h2>
-    <p>亲爱的，</p>
-    <p>这是一张特别的礼物卡，代表我对你的爱</p>
+    <h2>💝 爱的礼物卡 💝</h2>
+    <p>亲爱的宝贝，</p>
+    <p>这是一张特别的礼物卡</p>
+    <p>凭此卡可以兑换任何你想要的礼物</p>
+    <p>因为你值得世界上最好的一切</p>
     <p>永远爱你 ❤️</p>
+    <button class="gift-card-btn">收下这份心意</button>
   `;
   
   modal.appendChild(giftCard);
   document.body.appendChild(modal);
   
-  // 点击任意位置关闭礼物卡
-  modal.onclick = () => {
-    modal.remove();
-    // 继续播放剩余动画
-    continueAnimation();
+  // 点击按钮的效果
+  const acceptBtn = giftCard.querySelector('.gift-card-btn');
+  acceptBtn.onclick = (e) => {
+    e.stopPropagation();
+    // 添加接受动画
+    giftCard.style.transform = 'scale(0.8)';
+    giftCard.style.opacity = '0';
+    setTimeout(() => {
+      modal.remove();
+      // 显示爱心特效
+      showHeartEffect();
+      // 继续播放剩余动画
+      continueAnimation();
+    }, 500);
   };
+}
+
+// 添加爱心特效
+function showHeartEffect() {
+  const hearts = ['❤️', '💖', '💝', '💕', '💗'];
+  for(let i = 0; i < 15; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDelay = Math.random() * 2 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }
 }
 
 // 继续播放剩余动画

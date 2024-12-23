@@ -41,6 +41,8 @@
   cursor: pointer;
   transform-origin: center;
   animation: photoFadeIn 0.6s ease-out backwards;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
 }
 
 .photo-item:nth-child(4n) {
@@ -66,8 +68,10 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.photo-item:hover img {
-  transform: scale(1.08) rotate(1deg);
+.photo-item:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  z-index: 2;
 }
 
 /* 自定义滚动条样式 */
@@ -87,11 +91,19 @@
 
 .photo-wall h2 {
   text-align: center;
-  color: #333;
+  color: #d42426;
   font-size: 28px;
   margin-bottom: 25px;
   font-weight: 300;
   letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.photo-wall h2::before,
+.photo-wall h2::after {
+  content: '🎄';
+  margin: 0 10px;
+  font-size: 24px;
 }
 
 .photo-message {
@@ -162,14 +174,68 @@
 }
 
 .gift-card {
-  width: 300px;
-  padding: 30px;
-  background: linear-gradient(45deg, #ff69b4, #ff1493);
-  border-radius: 15px;
+  width: 350px;
+  padding: 35px;
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  border-radius: 20px;
   color: white;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   animation: cardPop 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.gift-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0.1) 100%);
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+.gift-card h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.gift-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.gift-card-btn {
+  margin-top: 25px;
+  padding: 12px 35px;
+  background: white;
+  color: #ff1493;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.gift-card-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  background: #fff5f9;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 @keyframes cardPop {
@@ -283,6 +349,75 @@
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* 添加照片阴影效果 */
+.photo-item::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 5%;
+  width: 90%;
+  height: 20px;
+  background: rgba(0,0,0,0.1);
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.photo-item:hover::after {
+  opacity: 1;
+}
+
+/* 添加圣诞节装饰 */
+.photo-wall::before {
+  content: '🎄';
+  position: absolute;
+  top: -30px;
+  left: 20px;
+  font-size: 40px;
+  animation: treeWiggle 2s ease-in-out infinite;
+}
+
+.photo-wall::after {
+  content: '🎅';
+  position: absolute;
+  top: -25px;
+  right: 20px;
+  font-size: 35px;
+  animation: santaWave 2s ease-in-out infinite;
+}
+
+@keyframes treeWiggle {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes santaWave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating-heart {
+  position: fixed;
+  font-size: 30px;
+  animation: floatHeart 3s ease-in forwards;
+  z-index: 1000;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(50vh) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
   }
 }
   
